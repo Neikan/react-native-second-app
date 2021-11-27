@@ -1,23 +1,24 @@
-import { StatusBar } from 'expo-status-bar'
-import React, { FC } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import React, { FC, useState } from 'react'
+import AppLoading from 'expo-app-loading'
+
+import { loadAppAssets } from '@/services/loadAppAssets'
+
+import { AppNavigation } from '@/navigation/AppNavigation'
 
 const App: FC = () => {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style='auto' />
-    </View>
-  )
-}
+  const [isReady, setIsReady] = useState(false)
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-})
+  if (!isReady) {
+    return (
+      <AppLoading
+        startAsync={loadAppAssets}
+        onFinish={() => setIsReady(true)}
+        onError={() => null}
+      />
+    )
+  }
+
+  return <AppNavigation />
+}
 
 export default App
