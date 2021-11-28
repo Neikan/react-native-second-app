@@ -6,7 +6,7 @@ import { Color } from '@/consts/themes'
 
 import { AppHeaderIcon } from '@/components/ui/AppHeaderIcon'
 import { useDispatch, useSelector } from 'react-redux'
-import { toggleBooked } from '@/store/posts/actions'
+import { removePost, toggleBooked } from '@/store/posts/actions'
 import { IApplicationState } from '@/store/types'
 
 export const CurrentScreen: FC<any> = ({ navigation, route }) => {
@@ -17,24 +17,6 @@ export const CurrentScreen: FC<any> = ({ navigation, route }) => {
 
   const post = allPosts.find((item) => item.id === params.postId)
   const booked = bookedPosts.some((item) => item.id === params.postId)
-
-  const handleRemovePost = (): void => {
-    Alert.alert(
-      'Удаление поста',
-      'Вы уверены, что хотите удалить пост?',
-      [
-        {
-          text: 'Подтвердить',
-          onPress: () => {}
-        },
-        {
-          text: 'Отмена',
-          style: 'cancel'
-        }
-      ],
-      { cancelable: true }
-    )
-  }
 
   useLayoutEffect(() => {
     const date = new Date(params.postDate).toLocaleDateString()
@@ -52,6 +34,27 @@ export const CurrentScreen: FC<any> = ({ navigation, route }) => {
   }, [navigation, route, booked])
 
   const handleToggleBooked = useCallback(() => dispatch(toggleBooked(post?.id)), [dispatch, post])
+
+  const handleRemovePost = (): void => {
+    Alert.alert(
+      'Удаление поста',
+      'Вы уверены, что хотите удалить пост?',
+      [
+        {
+          text: 'Подтвердить',
+          onPress: () => {
+            dispatch(removePost(post?.id))
+            navigation.goBack()
+          }
+        },
+        {
+          text: 'Отмена',
+          style: 'cancel'
+        }
+      ],
+      { cancelable: true }
+    )
+  }
 
   return (
     <ScrollView style={styles.view}>
