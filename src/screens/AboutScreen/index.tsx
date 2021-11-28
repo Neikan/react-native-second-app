@@ -9,10 +9,10 @@ const styles = StyleSheet.create({
   }
 })
 
-export const New: FC = () => {
+export const AboutScreen: FC = () => {
   return (
     <View style={styles.view}>
-      <Text>New</Text>
+      <Text>About</Text>
     </View>
   )
 }

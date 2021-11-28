@@ -16,8 +16,9 @@ const styles = StyleSheet.create({
   }
 })
 
-export const Main: FC<any> = ({ navigation }) => {
-  const goToCurrent = (post: IPost): void => navigation.navigate('Current', { postId: post.id, postDate: post.date })
+export const MainScreen: FC<any> = ({ navigation }) => {
+  const goToCurrent = (post: IPost): void =>
+    navigation.navigate('CurrentScreen', { postId: post.id, postDate: post.date })
 
   useLayoutEffect(() => {
     navigation.setOptions({

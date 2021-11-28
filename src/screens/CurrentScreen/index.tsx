@@ -1,10 +1,13 @@
 import React, { FC, useLayoutEffect } from 'react'
 import { Alert, Button, Image, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 
 import { DATA } from '@/consts/data'
 import { Color } from '@/consts/themes'
 
-export const Current: FC<any> = ({ navigation, route }) => {
+import { AppHeaderIcon } from '@/components/ui/AppHeaderIcon'
+
+export const CurrentScreen: FC<any> = ({ navigation, route }) => {
   const { params } = route
 
   const post = DATA.find((item) => item.id === params.postId)
@@ -30,7 +33,16 @@ export const Current: FC<any> = ({ navigation, route }) => {
   useLayoutEffect(() => {
     const date = new Date(params.postDate).toLocaleDateString()
 
-    navigation.setOptions({ headerTitle: 'Пост ' + String(params.postId) + ' от ' + date })
+    const iconName = post?.booked ? 'ios-star' : 'ios-star-outline'
+
+    navigation.setOptions({
+      headerTitle: 'Пост ' + String(params.postId) + ' от ' + date,
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
+          <Item title='photo' iconName={iconName} onPress={() => null} />
+        </HeaderButtons>
+      )
+    })
   }, [navigation, route])
 
   return (
