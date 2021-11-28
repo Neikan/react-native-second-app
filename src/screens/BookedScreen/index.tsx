@@ -22,7 +22,5 @@ export const BookedScreen: FC<any> = ({ navigation }) => {
     })
   }, [navigation])
 
-  return (
-    <AppPostsFlatList data={DATA.filter((post) => post.booked)} onOpen={goToCurrent} />
-  )
+  return <AppPostsFlatList data={DATA.filter((post) => post.booked)} onOpen={goToCurrent} />
 }
