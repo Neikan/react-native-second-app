@@ -8,9 +8,15 @@ export interface IPostsState {
 }
 
 export enum PostsActionTypes {
+  ADD_POST = 'ADD_POST',
   LOAD_POSTS = 'LOAD_POSTS',
   REMOVE_POST = 'REMOVE_POST',
   TOGGLE_BOOKED = 'TOGGLE_BOOKED'
+}
+
+export interface IActionAddPost extends Action<string> {
+  payload: IPost
+  type: PostsActionTypes.ADD_POST
 }
 
 export interface IActionLoadPosts extends Action<string> {
@@ -28,4 +34,4 @@ export interface IActionToggleBooked extends Action<string> {
   type: PostsActionTypes.TOGGLE_BOOKED
 }
 
-export type TPostsActions = IActionLoadPosts | IActionRemovePost | IActionToggleBooked
+export type TPostsActions = IActionAddPost | IActionLoadPosts | IActionRemovePost | IActionToggleBooked

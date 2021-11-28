@@ -2,7 +2,16 @@ import { Action, ActionCreator } from 'redux'
 
 import { DATA } from '@/consts/data'
 
-import { IActionLoadPosts, IActionRemovePost, IActionToggleBooked, PostsActionTypes } from './types'
+import { IPost } from '@/types'
+import { IActionAddPost, IActionLoadPosts, IActionRemovePost, IActionToggleBooked, PostsActionTypes } from './types'
+
+export const addPost: ActionCreator<Action> = (post: IPost): IActionAddPost => ({
+  payload: {
+    ...post,
+    id: Date.now().toString()
+  },
+  type: PostsActionTypes.ADD_POST
+})
 
 export const loadPosts: ActionCreator<Action> = (): IActionLoadPosts => ({
   payload: DATA,

@@ -7,6 +7,12 @@ const initialState: IPostsState = {
 
 export const postsReducer = (state: IPostsState = initialState, action: TPostsActions): IPostsState => {
   switch (action.type) {
+    case PostsActionTypes.ADD_POST:
+      return {
+        ...state,
+        allPosts: [action.payload, ...state.allPosts]
+      }
+
     case PostsActionTypes.LOAD_POSTS:
       return {
         ...state,
