@@ -1,16 +1,22 @@
-import React, { FC, useLayoutEffect } from 'react'
+import React, { FC, useCallback, useLayoutEffect } from 'react'
 import { Alert, Button, Image, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 
-import { DATA } from '@/consts/data'
 import { Color } from '@/consts/themes'
 
 import { AppHeaderIcon } from '@/components/ui/AppHeaderIcon'
+import { useDispatch, useSelector } from 'react-redux'
+import { toggleBooked } from '@/store/posts/actions'
+import { IApplicationState } from '@/store/types'
 
 export const CurrentScreen: FC<any> = ({ navigation, route }) => {
+  const { allPosts, bookedPosts } = useSelector((state: IApplicationState) => state.posts)
   const { params } = route
 
-  const post = DATA.find((item) => item.id === params.postId)
+  const dispatch = useDispatch()
+
+  const post = allPosts.find((item) => item.id === params.postId)
+  const booked = bookedPosts.some((item) => item.id === params.postId)
 
   const handleRemovePost = (): void => {
     Alert.alert(
@@ -33,17 +39,19 @@ export const CurrentScreen: FC<any> = ({ navigation, route }) => {
   useLayoutEffect(() => {
     const date = new Date(params.postDate).toLocaleDateString()
 
-    const iconName = post?.booked ? 'ios-star' : 'ios-star-outline'
+    const iconName = booked ? 'ios-star' : 'ios-star-outline'
 
     navigation.setOptions({
-      headerTitle: 'Пост ' + String(params.postId) + ' от ' + date,
+      headerTitle: 'Пост от ' + date,
       headerRight: () => (
         <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-          <Item title='photo' iconName={iconName} onPress={() => null} />
+          <Item title='photo' iconName={iconName} onPress={handleToggleBooked} />
         </HeaderButtons>
       )
     })
-  }, [navigation, route])
+  }, [navigation, route, booked])
+
+  const handleToggleBooked = useCallback(() => dispatch(toggleBooked(post?.id)), [dispatch, post])
 
   return (
     <ScrollView style={styles.view}>
