@@ -12,11 +12,13 @@ export const MainScreen: FC<any> = ({ navigation }) => {
   const goToCurrent = (post: IPost): void =>
     navigation.navigate('CurrentScreen', { postId: post.id, postDate: post.date })
 
+  const goToNew = (): void => navigation.navigate('NewScreen')
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
         <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-          <Item title='photo' iconName='ios-camera' onPress={() => null} />
+          <Item title='photo' iconName='ios-camera' onPress={goToNew} />
         </HeaderButtons>
       ),
       headerLeft: () => (
