@@ -14,6 +14,13 @@ export const postsReducer = (state: IPostsState = initialState, action: TPostsAc
         bookedPosts: action.payload.filter((post) => post.booked)
       }
 
+    case PostsActionTypes.REMOVE_POST:
+      return {
+        ...state,
+        allPosts: state.allPosts.filter((post) => post.id !== action.payload),
+        bookedPosts: state.bookedPosts.filter((post) => post.id !== action.payload)
+      }
+
     case PostsActionTypes.TOGGLE_BOOKED: {
       const allPosts = state.allPosts.map((post) => {
         if (post.id === action.payload) {
