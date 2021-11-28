@@ -1,5 +1,8 @@
 import React, { FC, useState } from 'react'
 import AppLoading from 'expo-app-loading'
+import { Provider } from 'react-redux'
+
+import store from '@/store/configureStore'
 
 import { loadAppAssets } from '@/services/loadAppAssets'
 
@@ -18,7 +21,11 @@ const App: FC = () => {
     )
   }
 
-  return <AppNavigation />
+  return (
+    <Provider store={store}>
+      <AppNavigation />
+    </Provider>
+  )
 }
 
 export default App
