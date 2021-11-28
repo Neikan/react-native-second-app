@@ -22,8 +22,8 @@
       "@/navigation": ["./navigation"],
       "@/services/*": ["./services/*"],
       "@/services": ["./services"],
-      "@/views/*": ["./views/*"],
-      "@/views": ["./views"],
+      "@/screens/*": ["./screens/*"],
+      "@/screens": ["./screens"],
       "@/types":  ["./types"],
     }
   },
