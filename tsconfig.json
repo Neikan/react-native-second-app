@@ -24,6 +24,8 @@
       "@/services": ["./services"],
       "@/screens/*": ["./screens/*"],
       "@/screens": ["./screens"],
+      "@/store/*": ["./store/*"],
+      "@/store": ["./store"],
       "@/types":  ["./types"],
     }
   },
