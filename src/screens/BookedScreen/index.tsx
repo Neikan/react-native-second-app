@@ -16,7 +16,7 @@ export const BookedScreen: FC<any> = ({ navigation }) => {
     navigation.setOptions({
       headerLeft: () => (
         <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-          <Item title='drawer' iconName='ios-menu' onPress={() => null} />
+          <Item title='drawer' iconName='ios-menu' onPress={navigation.toggleDrawer} />
         </HeaderButtons>
       )
     })
