@@ -5,3 +5,7 @@ export interface IPost {
   date: string
   booked: boolean
 }
+
+export interface AppIconProps {
+  [key: string]: any
+}
