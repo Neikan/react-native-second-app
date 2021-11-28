@@ -1,14 +1,19 @@
-import React, { FC, useLayoutEffect } from 'react'
+import React, { FC, useEffect, useLayoutEffect } from 'react'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
-
-import { DATA } from '@/consts/data'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { AppHeaderIcon } from '@/components/ui/AppHeaderIcon'
-
-import { IPost } from '@/types'
 import { AppPostsFlatList } from '@/components/ui/AppPostsFlatList'
 
+import { loadPosts } from '@/store/posts/actions'
+
+import { IPost } from '@/types'
+import { IApplicationState } from '@/store/types'
+
 export const MainScreen: FC<any> = ({ navigation }) => {
+  const dispatch = useDispatch()
+  const { allPosts } = useSelector((state: IApplicationState) => state.posts)
+
   const goToCurrent = (post: IPost): void =>
     navigation.navigate('CurrentScreen', { postId: post.id, postDate: post.date })
 
@@ -29,5 +34,9 @@ export const MainScreen: FC<any> = ({ navigation }) => {
     })
   }, [navigation])
 
-  return <AppPostsFlatList data={DATA} onOpen={goToCurrent} />
+  useEffect(() => {
+    dispatch(loadPosts())
+  }, [dispatch])
+
+  return <AppPostsFlatList data={allPosts} onOpen={goToCurrent} />
 }
