@@ -9,6 +9,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  description: {
+    marginBottom: 16
+  },
+  version: {
+    fontWeight: 'bold'
   }
 })
 
@@ -25,7 +31,8 @@ export const AboutScreen: FC<any> = ({ navigation }) => {
 
   return (
     <View style={styles.view}>
-      <Text>About</Text>
+      <Text style={styles.description}>Приложение для ведения личного блога</Text>
+      <Text>Версия: <Text style={styles.version}>1.0.0</Text></Text>
     </View>
   )
 }
