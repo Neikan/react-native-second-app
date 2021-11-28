@@ -1,14 +1,16 @@
 import React, { FC, useLayoutEffect } from 'react'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 
-import { DATA } from '@/consts/data'
-
 import { AppHeaderIcon } from '@/components/ui/AppHeaderIcon'
 
 import { IPost } from '@/types'
 import { AppPostsFlatList } from '@/components/ui/AppPostsFlatList'
+import { useSelector } from 'react-redux'
+import { IApplicationState } from '@/store/types'
 
 export const BookedScreen: FC<any> = ({ navigation }) => {
+  const { bookedPosts } = useSelector((state: IApplicationState) => state.posts)
+
   const goToCurrent = (post: IPost): void =>
     navigation.navigate('CurrentScreen', { postId: post.id, postDate: post.date })
 
@@ -22,5 +24,5 @@ export const BookedScreen: FC<any> = ({ navigation }) => {
     })
   }, [navigation])
 
-  return <AppPostsFlatList data={DATA.filter((post) => post.booked)} onOpen={goToCurrent} />
+  return <AppPostsFlatList data={bookedPosts} onOpen={goToCurrent} />
 }
