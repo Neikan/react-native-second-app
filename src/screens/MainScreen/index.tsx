@@ -21,13 +21,11 @@ export const MainScreen: FC<any> = ({ navigation }) => {
       ),
       headerLeft: () => (
         <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-          <Item title='drawer' iconName='ios-menu' onPress={() => null} />
+          <Item title='drawer' iconName='ios-menu' onPress={navigation.toggleDrawer} />
         </HeaderButtons>
       )
     })
   }, [navigation])
 
-  return (
-    <AppPostsFlatList data={DATA} onOpen={goToCurrent} />
-  )
+  return <AppPostsFlatList data={DATA} onOpen={goToCurrent} />
 }
