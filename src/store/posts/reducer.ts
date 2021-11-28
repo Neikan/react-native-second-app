@@ -14,6 +14,22 @@ export const postsReducer = (state: IPostsState = initialState, action: TPostsAc
         bookedPosts: action.payload.filter((post) => post.booked)
       }
 
+    case PostsActionTypes.TOGGLE_BOOKED: {
+      const allPosts = state.allPosts.map((post) => {
+        if (post.id === action.payload) {
+          post.booked = !post.booked
+        }
+
+        return post
+      })
+
+      return {
+        ...state,
+        allPosts,
+        bookedPosts: allPosts.filter((post) => post.booked)
+      }
+    }
+
     default:
       return state
   }
