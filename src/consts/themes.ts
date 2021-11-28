@@ -19,5 +19,15 @@ export enum Color {
   DANGER_600 = '#A91818',
   DANGER_700 = '#820101',
   DANGER_800 = '#5C0000',
-  DANGER_900 = '#390000'
+  DANGER_900 = '#390000',
+
+  GRAY_100 = '#EAEAEA',
+  GRAY_200 = '#DFDFDF',
+  GRAY_300 = '#D0D0D0',
+  GRAY_400 = '#B0B0B0',
+  GRAY_500 = '#8B8B8B',
+  GRAY_600 = '#6C6C6C',
+  GRAY_700 = '#4D4D4D',
+  GRAY_800 = '#2E2E2E',
+  GRAY_900 = '#1E1E1E'
 }
