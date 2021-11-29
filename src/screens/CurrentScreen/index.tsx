@@ -33,7 +33,7 @@ export const CurrentScreen: FC<any> = ({ navigation, route }) => {
     })
   }, [navigation, route, booked])
 
-  const handleToggleBooked = useCallback(() => dispatch(toggleBooked(post?.id)), [dispatch, post])
+  const handleToggleBooked = useCallback(() => dispatch(toggleBooked(post)), [dispatch, post])
 
   const handleRemovePost = (): void => {
     Alert.alert(
