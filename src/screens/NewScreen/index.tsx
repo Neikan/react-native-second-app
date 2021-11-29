@@ -1,19 +1,11 @@
-import React, { FC, useLayoutEffect, useState } from 'react'
-import {
-  Button,
-  Image,
-  Keyboard,
-  ScrollView,
-  StyleSheet,
-  TextInput,
-  TouchableWithoutFeedback,
-  View
-} from 'react-native'
+import React, { FC, useLayoutEffect, useRef, useState } from 'react'
+import { Button, Keyboard, ScrollView, StyleSheet, TextInput, TouchableWithoutFeedback, View } from 'react-native'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import { useDispatch } from 'react-redux'
 
 import { Color } from '@/consts/themes'
 
+import { PhotoPicker } from '@/components/elements/PhotoPicker'
 import { AppHeaderIcon } from '@/components/ui/AppHeaderIcon'
 
 import { addPost } from '@/store/posts/actions'
@@ -22,6 +14,7 @@ import { IPost } from '@/types'
 
 export const NewScreen: FC<any> = ({ navigation }) => {
   const [text, setText] = useState('')
+  const imgRef = useRef<string>()
 
   const dispatch = useDispatch()
 
@@ -35,12 +28,10 @@ export const NewScreen: FC<any> = ({ navigation }) => {
     })
   }, [navigation])
 
-  const img = 'https://static.coindesk.com/wp-content/uploads/2019/01/shutterstock_1012724596-860x430.jpg'
-
   const handleAddPost = (): void => {
     const newPost: IPost = {
       id: '',
-      img,
+      img: imgRef.current ?? '',
       text,
       date: new Date().toJSON(),
       booked: false
@@ -49,6 +40,10 @@ export const NewScreen: FC<any> = ({ navigation }) => {
     dispatch(addPost(newPost))
     setText('')
     navigation.navigate('MainScreen')
+  }
+
+  const handlePickPhoto = (uri: string): void => {
+    imgRef.current = uri
   }
 
   return (
@@ -65,13 +60,8 @@ export const NewScreen: FC<any> = ({ navigation }) => {
             style={styles.textarea}
             value={text}
           />
-          <Image
-            style={styles.image}
-            source={{
-              uri: img
-            }}
-          />
-          <Button color={Color.PRIMARY_600} onPress={handleAddPost} title='Создать пост' />
+          <PhotoPicker onPick={handlePickPhoto} />
+          <Button color={Color.PRIMARY_600} onPress={handleAddPost} title='Создать пост' disabled={!text} />
         </View>
       </TouchableWithoutFeedback>
     </ScrollView>
