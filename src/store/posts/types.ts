@@ -1,6 +1,8 @@
 import { Action } from 'redux'
+import { ThunkAction, ThunkDispatch } from 'redux-thunk'
 
 import { IPost } from '@/types'
+import { IApplicationState } from '../types'
 
 export interface IPostsState {
   allPosts: IPost[]
@@ -35,3 +37,7 @@ export interface IActionToggleBooked extends Action<string> {
 }
 
 export type TPostsActions = IActionAddPost | IActionLoadPosts | IActionRemovePost | IActionToggleBooked
+
+export type PostsThunkAction = ThunkAction<Promise<any> | any, IApplicationState, void, Action<string>>
+
+export type PostsThunkDispatch = ThunkDispatch<IPostsState, void, Action<string>>
