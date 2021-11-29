@@ -1,12 +1,13 @@
-import { IPost, IPostToDB } from '@/types'
 import * as SQLite from 'expo-sqlite'
+
+import { IPost, IPostToDB } from '@/types'
 
 const db = SQLite.openDatabase('post.db')
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class DB {
   static init(): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject: any) => {
       db.transaction(tx => {
         tx.executeSql(
           'CREATE TABLE IF NOT EXISTS posts (id INTEGER PRIMARY KEY NOT NULL, text TEXT NOT NULL, img TEXT, date TEXT, booked INT)',
@@ -19,7 +20,7 @@ export class DB {
   }
 
   static getPosts(): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject: any) => {
       db.transaction(tx => {
         tx.executeSql(
           'SELECT * FROM posts',
@@ -32,7 +33,7 @@ export class DB {
   }
 
   static createPost({ text, date, img }: IPostToDB): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject: any) => {
       db.transaction(tx => {
         tx.executeSql(
           'INSERT INTO posts (text, date, booked, img) VALUES (?, ?, ?, ?)',
@@ -45,7 +46,7 @@ export class DB {
   }
 
   static updatePost({ id, booked }: IPost): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject: any) => {
       db.transaction(tx => {
         tx.executeSql(
           'UPDATE posts SET booked = ? WHERE id = ?',
@@ -58,7 +59,7 @@ export class DB {
   }
 
   static removePost(id: string): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject: any) => {
       db.transaction(tx => {
         tx.executeSql(
           'DELETE FROM posts WHERE id = ?',
