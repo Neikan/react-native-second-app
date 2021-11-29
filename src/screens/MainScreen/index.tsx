@@ -17,7 +17,7 @@ export const MainScreen: FC<any> = ({ navigation }) => {
   const goToCurrent = (post: IPost): void =>
     navigation.navigate('CurrentScreen', { postId: post.id, postDate: post.date })
 
-  const goToNew = (): void => navigation.navigate('NewScreen')
+  const goToNew = (): void => navigation.navigate('NewStackScreen')
 
   useLayoutEffect(() => {
     navigation.setOptions({
