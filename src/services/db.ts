@@ -1,4 +1,4 @@
-import { IPostToDB } from '@/types'
+import { IPost, IPostToDB } from '@/types'
 import * as SQLite from 'expo-sqlite'
 
 const db = SQLite.openDatabase('post.db')
@@ -38,6 +38,32 @@ export class DB {
           'INSERT INTO posts (text, date, booked, img) VALUES (?, ?, ?, ?)',
           [text, date, 0, img],
           (_, result) => resolve(result.insertId),
+          (_, error) => reject(error)
+        )
+      })
+    })
+  }
+
+  static updatePost({ id, booked }: IPost): Promise<any> {
+    return new Promise((resolve, reject) => {
+      db.transaction(tx => {
+        tx.executeSql(
+          'UPDATE posts SET booked = ? WHERE id = ?',
+          [booked ? 0 : 1, id],
+          resolve,
+          (_, error) => reject(error)
+        )
+      })
+    })
+  }
+
+  static removePost(id: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      db.transaction(tx => {
+        tx.executeSql(
+          'DELETE FROM posts WHERE id = ?',
+          [id],
+          resolve,
           (_, error) => reject(error)
         )
       })
