@@ -1,7 +1,5 @@
 import { Action, ActionCreator } from 'redux'
 
-import { DATA } from '@/consts/data'
-
 import { IPost } from '@/types'
 import { IActionAddPost, IActionLoadPosts, IActionRemovePost, IActionToggleBooked, PostsActionTypes } from './types'
 
@@ -13,8 +11,8 @@ export const addPost: ActionCreator<Action> = (post: IPost): IActionAddPost => (
   type: PostsActionTypes.ADD_POST
 })
 
-export const loadPosts: ActionCreator<Action> = (): IActionLoadPosts => ({
-  payload: DATA,
+export const loadPosts: ActionCreator<Action> = (posts: IPost[]): IActionLoadPosts => ({
+  payload: [],
   type: PostsActionTypes.LOAD_POSTS
 })
 
