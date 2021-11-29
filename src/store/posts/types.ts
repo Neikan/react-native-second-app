@@ -7,6 +7,7 @@ import { IApplicationState } from '../types'
 export interface IPostsState {
   allPosts: IPost[]
   bookedPosts: IPost[]
+  loading: boolean
 }
 
 export enum PostsActionTypes {

@@ -2,7 +2,8 @@ import { IPostsState, PostsActionTypes, TPostsActions } from './types'
 
 const initialState: IPostsState = {
   allPosts: [],
-  bookedPosts: []
+  bookedPosts: [],
+  loading: true
 }
 
 export const postsReducer = (state: IPostsState = initialState, action: TPostsActions): IPostsState => {
@@ -17,7 +18,8 @@ export const postsReducer = (state: IPostsState = initialState, action: TPostsAc
       return {
         ...state,
         allPosts: action.payload,
-        bookedPosts: action.payload.filter((post) => post.booked)
+        bookedPosts: action.payload.filter((post) => post.booked),
+        loading: false
       }
 
     case PostsActionTypes.REMOVE_POST:
