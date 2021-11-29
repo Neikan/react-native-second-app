@@ -10,7 +10,7 @@ import { AppHeaderIcon } from '@/components/ui/AppHeaderIcon'
 
 import { addPost } from '@/store/posts/actions'
 
-import { IPost } from '@/types'
+import { IPostToDB } from '@/types'
 
 export const NewScreen: FC<any> = ({ navigation }) => {
   const [text, setText] = useState('')
@@ -29,8 +29,7 @@ export const NewScreen: FC<any> = ({ navigation }) => {
   }, [navigation])
 
   const handleAddPost = (): void => {
-    const newPost: IPost = {
-      id: '',
+    const newPost: IPostToDB = {
       img: imgRef.current ?? '',
       text,
       date: new Date().toJSON(),
