@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "Self Blog",
+    "slug": "react-native-second-app",
+    "privacy": "public",
+    "version": "1.0.0",
+    "orientation": "default",
+    "icon": "./assets/rn-icon.png",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "splash": {
+      "image": "./assets/rn-splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#242832"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    }
+  }
+}
